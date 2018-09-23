@@ -24,6 +24,11 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.KeluarToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TampilkanDalamFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.BuatBaruToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -36,14 +41,9 @@ Partial Class Form1
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.KeluarToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.TampilkanDalamFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -54,6 +54,35 @@ Partial Class Form1
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(517, 392)
         Me.TabControl1.TabIndex = 0
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripMenuItem, Me.KeluarToolStripMenuItem2, Me.ToolStripMenuItem1, Me.TampilkanDalamFolderToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(200, 98)
+        '
+        'SaveToolStripMenuItem
+        '
+        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.SaveToolStripMenuItem.Text = "Simpan"
+        '
+        'KeluarToolStripMenuItem2
+        '
+        Me.KeluarToolStripMenuItem2.Name = "KeluarToolStripMenuItem2"
+        Me.KeluarToolStripMenuItem2.Size = New System.Drawing.Size(199, 22)
+        Me.KeluarToolStripMenuItem2.Text = "Keluar"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(196, 6)
+        '
+        'TampilkanDalamFolderToolStripMenuItem
+        '
+        Me.TampilkanDalamFolderToolStripMenuItem.Name = "TampilkanDalamFolderToolStripMenuItem"
+        Me.TampilkanDalamFolderToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.TampilkanDalamFolderToolStripMenuItem.Text = "Tampilkan dalam folder"
         '
         'ListView1
         '
@@ -126,35 +155,6 @@ Partial Class Form1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Daftar Catatan"
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripMenuItem, Me.KeluarToolStripMenuItem2, Me.ToolStripMenuItem1, Me.TampilkanDalamFolderToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(200, 76)
-        '
-        'SaveToolStripMenuItem
-        '
-        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
-        Me.SaveToolStripMenuItem.Text = "Simpan"
-        '
-        'KeluarToolStripMenuItem2
-        '
-        Me.KeluarToolStripMenuItem2.Name = "KeluarToolStripMenuItem2"
-        Me.KeluarToolStripMenuItem2.Size = New System.Drawing.Size(199, 22)
-        Me.KeluarToolStripMenuItem2.Text = "Keluar"
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(196, 6)
-        '
-        'TampilkanDalamFolderToolStripMenuItem
-        '
-        Me.TampilkanDalamFolderToolStripMenuItem.Name = "TampilkanDalamFolderToolStripMenuItem"
-        Me.TampilkanDalamFolderToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
-        Me.TampilkanDalamFolderToolStripMenuItem.Text = "Tampilkan dalam folder"
-        '
         'Form1
         '
         Me.AllowDrop = True
@@ -167,10 +167,10 @@ Partial Class Form1
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Form1"
         Me.Text = "Form1"
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
-        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

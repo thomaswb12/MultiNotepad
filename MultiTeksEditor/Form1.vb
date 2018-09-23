@@ -59,4 +59,8 @@ Public Class Form1
         End If
 
     End Sub
+
+    Private Sub KeluarToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles KeluarToolStripMenuItem2.Click
+        TabControl1.TabPages.Remove(TabControl1.SelectedTab)
+    End Sub
 End Class
