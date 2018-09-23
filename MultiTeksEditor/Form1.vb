@@ -5,6 +5,7 @@ Public Class Form1
     ' ------------------------- DRAG & DROP -----------------------------------
     'when item has been dropped
     Dim tampFile As List(Of Files) = New List(Of Files)
+    Dim newTabe As Integer
     Dim tampUserControl As List(Of UserControl1) = New List(Of UserControl1)
     Private Sub Form1_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
         'take dropped items and hold in array
@@ -54,8 +55,10 @@ Public Class Form1
         newPage.Text = "New Tab"
         Dim X As New UserControl1()
         newPage.Controls.Add(X)
-        X.Path = "New Tab"
-        X.Name = "New Tab"
+        newPage.Name = "New Tab" & newTabe
+        X.Path = ""
+        X.Name = "New Tab" & newTabe
+        newTabe += 1
         TabControl1.TabPages.Add(newPage)
         TabControl1.SelectedTab = newPage
         tampUserControl.Add(X)
@@ -99,12 +102,15 @@ Public Class Form1
         Dim dr As DialogResult
         If (TabControl1.SelectedTab.Text = "New Tab") Then
             dr = SaveFileDialog1.ShowDialog()
-            MsgBox(SaveFileDialog1.FileName)
             If dr = DialogResult.OK Then
                 For Each nameFile In tampUserControl
-                    If nameFile.Name = TabControl1.SelectedTab.Text Then
-                        'MsgBox(nameFile.Path)
-                        System.IO.File.WriteAllText(nameFile.Path, nameFile.txtNotepad.Text)
+                    If nameFile.Name = TabControl1.SelectedTab.Name Then
+                        'MsgBox(SaveFileDialog1.FileName)
+                        System.IO.File.WriteAllText(SaveFileDialog1.FileName, nameFile.txtNotepad.Text)
+                        Dim file As Files = New Files(SaveFileDialog1.FileName, Path.GetDirectoryName(SaveFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
+                        tampFile.Add(File)
+                        ListView1.Items.Add(Path.GetDirectoryName(SaveFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
+                        TabControl1.SelectedTab.Text = Path.GetDirectoryName(SaveFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName)
                     End If
                 Next
                 MsgBox("File Berhasil Tersimpan")
@@ -118,5 +124,9 @@ Public Class Form1
             Next
             MsgBox("File Berhasil Tersimpan")
         End If
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        newTabe = 1
     End Sub
 End Class

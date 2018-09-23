@@ -50,7 +50,7 @@ Partial Class Form1
         '
         Me.TabControl1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TabControl1.Location = New System.Drawing.Point(361, 57)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(689, 482)
@@ -89,7 +89,7 @@ Partial Class Form1
         'ListView1
         '
         Me.ListView1.Location = New System.Drawing.Point(8, 23)
-        Me.ListView1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ListView1.Margin = New System.Windows.Forms.Padding(4)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(328, 474)
         Me.ListView1.TabIndex = 0
@@ -159,9 +159,9 @@ Partial Class Form1
         '
         Me.GroupBox1.Controls.Add(Me.ListView1)
         Me.GroupBox1.Location = New System.Drawing.Point(16, 33)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(345, 506)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
@@ -177,7 +177,7 @@ Partial Class Form1
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.GroupBox1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.ContextMenuStrip1.ResumeLayout(False)
