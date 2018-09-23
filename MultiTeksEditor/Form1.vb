@@ -65,9 +65,7 @@ Public Class Form1
 
     End Sub
 
-<<<<<<< HEAD
-    ' ----------------- klik kanan "KELUAR" ----------------
-=======
+    ' -------- OPEN TAB DOUBLE KLIK ------------
     Private Sub ListView1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListView1.MouseDoubleClick
         For Each file In tampFile
             If (file.Name) = ListView1.SelectedItems(0).Text Then
@@ -82,7 +80,7 @@ Public Class Form1
         Next
     End Sub
 
->>>>>>> 6f8d5fa363ba2c8ad62a89f1369c8f6053090535
+    '---------------- klik kanan "KELUAR" ------------------
     Private Sub KeluarToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles KeluarToolStripMenuItem2.Click
         TabControl1.TabPages.Remove(TabControl1.SelectedTab)
     End Sub
