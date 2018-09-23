@@ -52,7 +52,11 @@ Public Class Form1
         TabControl1.SelectedTab = newPage
     End Sub
 
-    Private Sub OpenFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
+
+    Private Sub BukaFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BukaFileToolStripMenuItem.Click
+        If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+            ListView1.Items.Add(Path.GetDirectoryName(OpenFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
+        End If
 
     End Sub
 End Class
