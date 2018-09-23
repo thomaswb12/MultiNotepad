@@ -67,9 +67,17 @@ Public Class Form1
     ' --------- menu "BUKA FILE" ---------------
     Private Sub BukaFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BukaFileToolStripMenuItem.Click
         If OpenFileDialog1.ShowDialog = DialogResult.OK Then
-            Dim file As Files = New Files(OpenFileDialog1.FileName, Path.GetDirectoryName(OpenFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
-            tampFile.Add(file)
-            ListView1.Items.Add(Path.GetDirectoryName(OpenFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
+            Dim selectedValue As Files
+            selectedValue = tampFile.Find(Function(p) p.Path = OpenFileDialog1.FileName)
+            If (selectedValue Is Nothing) Then
+                MsgBox("file berhasil di tambah")
+                Dim file As Files = New Files(OpenFileDialog1.FileName, Path.GetDirectoryName(OpenFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
+                tampFile.Add(file)
+                ListView1.Items.Add(Path.GetDirectoryName(OpenFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
+            Else
+                MsgBox("file sudah ada")
+            End If
+
         End If
 
     End Sub
@@ -105,12 +113,13 @@ Public Class Form1
             If dr = DialogResult.OK Then
                 For Each nameFile In tampUserControl
                     If nameFile.Name = TabControl1.SelectedTab.Name Then
-                        'MsgBox(SaveFileDialog1.FileName)
+
                         System.IO.File.WriteAllText(SaveFileDialog1.FileName, nameFile.txtNotepad.Text)
-                        Dim file As Files = New Files(SaveFileDialog1.FileName, Path.GetDirectoryName(SaveFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
-                        tampFile.Add(File)
-                        ListView1.Items.Add(Path.GetDirectoryName(SaveFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
-                        TabControl1.SelectedTab.Text = Path.GetDirectoryName(SaveFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName)
+                        'MsgBox(Path.GetFileName(SaveFileDialog1.FileName))
+                        Dim file As Files = New Files(SaveFileDialog1.FileName, Path.GetDirectoryName(SaveFileDialog1.FileName) & " - " & Path.GetFileName(SaveFileDialog1.FileName))
+                        tampFile.Add(file)
+                        ListView1.Items.Add(Path.GetDirectoryName(SaveFileDialog1.FileName) & " - " & Path.GetFileName(SaveFileDialog1.FileName))
+                        TabControl1.SelectedTab.Text = Path.GetDirectoryName(SaveFileDialog1.FileName) & " - " & Path.GetFileName(SaveFileDialog1.FileName)
                     End If
                 Next
                 MsgBox("File Berhasil Tersimpan")
@@ -120,6 +129,7 @@ Public Class Form1
                 If nameFile.Name = TabControl1.SelectedTab.Text Then
                     'MsgBox(nameFile.Path)
                     System.IO.File.WriteAllText(nameFile.Path, nameFile.txtNotepad.Text)
+
                 End If
             Next
             MsgBox("File Berhasil Tersimpan")
