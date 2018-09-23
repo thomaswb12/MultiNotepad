@@ -41,11 +41,23 @@ Public Class Form1
             Dim files() As System.IO.FileInfo
             Dim dirinfo As New System.IO.DirectoryInfo(directory)
             files = dirinfo.GetFiles("*.txt", IO.SearchOption.TopDirectoryOnly)
+            Dim err As String
             For Each file In files
-                Dim filea As Files = New Files(directory & "\" & file.ToString, directory & " - " & file.ToString)
-                tampFile.Add(filea)
-                ListView1.Items.Add(directory & " - " & file.ToString)
+                Dim selectedValue As Files
+                selectedValue = tampFile.Find(Function(p) p.Path = directory & "\" & file.ToString)
+                If (selectedValue Is Nothing) Then
+                    Dim filea As Files = New Files(directory & "\" & file.ToString, directory & " - " & file.ToString)
+                    tampFile.Add(filea)
+                    ListView1.Items.Add(directory & " - " & file.ToString)
+                Else
+                    err = "Ada yang yang sudah ada di daftar"
+                End If
             Next
+            If (err Is Nothing) Then
+                MsgBox("Folder Berhasil dimasukan ke list")
+            Else
+                MsgBox(err)
+            End If
         End If
     End Sub
 
