@@ -5,6 +5,7 @@ Public Class Form1
     ' ------------------------- DRAG & DROP -----------------------------------
     'when item has been dropped
     Dim tampFile As List(Of Files) = New List(Of Files)
+    Dim tampUserControl As List(Of UserControl1) = New List(Of UserControl1)
     Private Sub Form1_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
         'take dropped items and hold in array
         Dim droppedItems As String() = e.Data.GetData(DataFormats.FileDrop)
@@ -53,8 +54,11 @@ Public Class Form1
         newPage.Text = "New Tab"
         Dim X As New UserControl1()
         newPage.Controls.Add(X)
+        X.Path = "New Tab"
+        X.Name = "New Tab"
         TabControl1.TabPages.Add(newPage)
         TabControl1.SelectedTab = newPage
+        tampUserControl.Add(X)
     End Sub
 
     ' --------- menu "BUKA FILE" ---------------
@@ -74,10 +78,13 @@ Public Class Form1
                 Dim newPage As New TabPage()
                 newPage.Text = file.Name
                 Dim X As New UserControl1()
+                X.txtNotepad.Text = System.IO.File.ReadAllText(file.Path)
+                X.Path = file.Path
+                X.Name = file.Name
                 newPage.Controls.Add(X)
                 TabControl1.TabPages.Add(newPage)
                 TabControl1.SelectedTab = newPage
-                X.txtNotepad.Text = System.IO.File.ReadAllText(file.Path)
+                tampUserControl.Add(X)
             End If
         Next
     End Sub
@@ -87,4 +94,29 @@ Public Class Form1
         TabControl1.TabPages.Remove(TabControl1.SelectedTab)
     End Sub
 
+
+    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+        Dim dr As DialogResult
+        If (TabControl1.SelectedTab.Text = "New Tab") Then
+            dr = SaveFileDialog1.ShowDialog()
+            MsgBox(SaveFileDialog1.FileName)
+            If dr = DialogResult.OK Then
+                For Each nameFile In tampUserControl
+                    If nameFile.Name = TabControl1.SelectedTab.Text Then
+                        'MsgBox(nameFile.Path)
+                        System.IO.File.WriteAllText(nameFile.Path, nameFile.txtNotepad.Text)
+                    End If
+                Next
+                MsgBox("File Berhasil Tersimpan")
+            End If
+        Else
+            For Each nameFile In tampUserControl
+                If nameFile.Name = TabControl1.SelectedTab.Text Then
+                    'MsgBox(nameFile.Path)
+                    System.IO.File.WriteAllText(nameFile.Path, nameFile.txtNotepad.Text)
+                End If
+            Next
+            MsgBox("File Berhasil Tersimpan")
+        End If
+    End Sub
 End Class

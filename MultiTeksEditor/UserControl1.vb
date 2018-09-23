@@ -1,4 +1,6 @@
 ﻿Public Class UserControl1
+
+    Public Property Path As String
     'masukkin font yang ada di komputer ke combobox
     Private Sub ComboBox1_Click(sender As Object, e As EventArgs) Handles ComboBox1.Click
         'If (FontDialog1.ShowDialog = DialogResult.OK) Then
