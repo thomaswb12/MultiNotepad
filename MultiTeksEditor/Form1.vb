@@ -40,6 +40,8 @@ Public Class Form1
             Dim dirinfo As New System.IO.DirectoryInfo(directory)
             files = dirinfo.GetFiles("*.txt", IO.SearchOption.AllDirectories)
             For Each file In files
+                Dim filea As Files = New Files(directory & "\" & file.ToString, directory & " - " & file.ToString)
+                tampFile.Add(filea)
                 ListView1.Items.Add(directory & " - " & file.ToString)
             Next
         End If
