@@ -65,6 +65,7 @@ Public Class Form1
 
     End Sub
 
+    ' -------- OPEN TAB DOUBLE KLIK ------------
     Private Sub ListView1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListView1.MouseDoubleClick
         For Each file In tampFile
             If (file.Name) = ListView1.SelectedItems(0).Text Then
