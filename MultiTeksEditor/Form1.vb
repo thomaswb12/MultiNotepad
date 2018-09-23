@@ -1,7 +1,10 @@
 ﻿Imports System.IO
+
+
 Public Class Form1
     ' ------------------------- DRAG & DROP -----------------------------------
     'when item has been dropped
+    Dim tampFile As List(Of Files) = New List(Of Files)
     Private Sub Form1_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
         'take dropped items and hold in array
         Dim droppedItems As String() = e.Data.GetData(DataFormats.FileDrop)
@@ -52,15 +55,36 @@ Public Class Form1
         TabControl1.SelectedTab = newPage
     End Sub
 
-
+    ' --------- menu "BUKA FILE" ---------------
     Private Sub BukaFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BukaFileToolStripMenuItem.Click
         If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+            Dim file As Files = New Files(OpenFileDialog1.FileName, Path.GetDirectoryName(OpenFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
+            tampFile.Add(file)
             ListView1.Items.Add(Path.GetDirectoryName(OpenFileDialog1.FileName) & " - " & Path.GetFileName(OpenFileDialog1.FileName))
         End If
 
     End Sub
 
+<<<<<<< HEAD
+    ' ----------------- klik kanan "KELUAR" ----------------
+=======
+    Private Sub ListView1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListView1.MouseDoubleClick
+        For Each file In tampFile
+            If (file.Name) = ListView1.SelectedItems(0).Text Then
+                Dim newPage As New TabPage()
+                newPage.Text = file.Name
+                Dim X As New UserControl1()
+                newPage.Controls.Add(X)
+                TabControl1.TabPages.Add(newPage)
+                TabControl1.SelectedTab = newPage
+                X.txtNotepad.Text = System.IO.File.ReadAllText(file.Path)
+            End If
+        Next
+    End Sub
+
+>>>>>>> 6f8d5fa363ba2c8ad62a89f1369c8f6053090535
     Private Sub KeluarToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles KeluarToolStripMenuItem2.Click
         TabControl1.TabPages.Remove(TabControl1.SelectedTab)
     End Sub
+
 End Class
