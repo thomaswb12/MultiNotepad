@@ -40,7 +40,7 @@ Public Class Form1
             Dim directory = FolderBrowserDialog1.SelectedPath
             Dim files() As System.IO.FileInfo
             Dim dirinfo As New System.IO.DirectoryInfo(directory)
-            files = dirinfo.GetFiles("*.txt", IO.SearchOption.AllDirectories)
+            files = dirinfo.GetFiles("*.txt", IO.SearchOption.TopDirectoryOnly)
             For Each file In files
                 Dim filea As Files = New Files(directory & "\" & file.ToString, directory & " - " & file.ToString)
                 tampFile.Add(filea)
