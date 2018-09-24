@@ -13,16 +13,51 @@ Public Class Form1
 
         'loop thru all dropped files displaying them
         For Each pathh In droppedItems
+            Dim dir = Path.GetFullPath(pathh)
             'check isDirectory?
             If Directory.Exists(pathh) Then
                 Dim files() As FileInfo
                 Dim dirinfo As New DirectoryInfo(pathh)
-                files = dirinfo.GetFiles("*.txt", SearchOption.AllDirectories)
+                files = dirinfo.GetFiles("*.txt", SearchOption.TopDirectoryOnly)
+                Dim err As String
                 For Each file In files
-                    ListView1.Items.Add(pathh & " - " & file.ToString)
+                    If Path.GetExtension(file.ToString) = ".txt" Then
+                        Dim selectedValue As Files
+                        selectedValue = tampFile.Find(Function(p) p.Path = dir & "\" & file.ToString)
+                        If (selectedValue Is Nothing) Then
+                            Dim filea As Files = New Files(dir & "\" & file.ToString, dir & " - " & file.ToString)
+                            tampFile.Add(filea)
+                            ListView1.Items.Add(dir & " - " & file.ToString)
+                        Else
+                            err = "Ada file yang yang sudah ada di daftar"
+                        End If
+
+                    End If
+                    'Dim filea As Files = New Files(dir & "\" & file.ToString, dir & " - " & file.ToString)
+                    'tampFile.Add(filea)
+                    'ListView1.Items.Add(dir & " - " & file.ToString)
                 Next
+                If err Is Nothing Then
+                    MsgBox("Seluruh file berhasil masuk daftar")
+                Else
+                    MsgBox(err)
+                End If
             Else
-                ListView1.Items.Add(pathh)
+                If Path.GetExtension(pathh.ToString) = ".txt" Then
+                    Dim selectedValue As Files
+                    selectedValue = tampFile.Find(Function(p) p.Path = Path.GetDirectoryName(pathh.ToString) & "\" & Path.GetFileName(pathh.ToString))
+                    If (selectedValue Is Nothing) Then
+                        Dim filea As Files = New Files(Path.GetDirectoryName(pathh.ToString) & "\" & Path.GetFileName(pathh.ToString), Path.GetDirectoryName(pathh.ToString) & " - " & Path.GetFileName(pathh.ToString))
+                        tampFile.Add(filea)
+                        ListView1.Items.Add(Path.GetDirectoryName(pathh.ToString) & " - " & Path.GetFileName(pathh.ToString))
+                    Else
+                        MsgBox("File Sudah ada")
+                    End If
+
+                Else
+                    MsgBox("format file bukan .txt")
+                End If
+
             End If
         Next
     End Sub
@@ -50,7 +85,7 @@ Public Class Form1
                     tampFile.Add(filea)
                     ListView1.Items.Add(directory & " - " & file.ToString)
                 Else
-                    err = "Ada yang yang sudah ada di daftar"
+                    err = "Ada file yang yang sudah ada di daftar"
                 End If
             Next
             If (err Is Nothing) Then
@@ -146,6 +181,17 @@ Public Class Form1
             Next
             MsgBox("File Berhasil Tersimpan")
         End If
+    End Sub
+
+    '---------------- klik kanan "TAMPILKAN DALAM FOLDER" ------------------
+    Private Sub TampilkanDalamFolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TampilkanDalamFolderToolStripMenuItem.Click
+        For Each file In tampFile
+            If (file.Name) = ListView1.SelectedItems(0).Text Then
+                Dim locationDirectory As String
+                locationDirectory = Path.GetDirectoryName(file.Path)
+                Process.Start(locationDirectory)
+            End If
+        Next
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
